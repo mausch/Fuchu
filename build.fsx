@@ -8,8 +8,8 @@ open Fake
 open Fake.ProcessHelper
 open Fake.AssemblyInfoFile
 
-let version = "0.4.0.0"
-let assemblyVersion = "0.4.0.0"
+let version = "0.5.0.0"
+let assemblyVersion = "0.5.0.0"
 
 type Package = {
     Name: string
@@ -21,23 +21,42 @@ type Package = {
 
 module Pkg =
     open System
+    open System.Text.RegularExpressions
     open System.IO
     open System.Xml.Linq
     open global.NuGet
 
-    let dependenciesFromConfig (path: string) = 
-        XDocument.Load(path @@ "packages.config").Root.Elements(XName.Get "package")
-        |> Seq.map (fun e -> e.Attribute(XName.Get "id").Value, e.Attribute(XName.Get "version").Value)
+    let rmatch pattern input =
+      match Regex.Matches(input, pattern) with
+      | x when x.Count > 0 ->
+        x
+        |> Seq.cast<Match>
+        |> Seq.head
+        |> fun x -> x.Groups
+        |> Some
+      | _ -> None
+
+    let dependenciesFromConfig (path: string) =
+        File.ReadAllLines (path @@ "paket.references")
+        |> Seq.map (fun pkgId ->
+            let specLine =
+              File.ReadAllLines("paket.lock")
+              |> Seq.filter (fun l -> l.Contains(pkgId))
+              |> Seq.head
+            rmatch "\A\s+(?<pkg_id>[\w\.]+) \((?<pkg_ver>[\d\.]+)\)$" specLine
+            |> Option.get
+            |> fun group -> group.["pkg_id"].Value, group.["pkg_ver"].Value
+        )
         |> Seq.toList
 
     let build (p: Package) =
-        let builder = 
+        let builder =
             PackageBuilder(
                 Id = p.Name,
                 Title = p.Name,
                 Version = SemanticVersion version,
                 Description = p.Description,
-                LicenseUrl = Uri("https://raw.githubusercontent.com/mausch/Fuchu/master/license.txt"),
+                LicenseUrl = Uri("https://raw.githubusercontent.com/suaveio/Fuchu/master/license.txt"),
                 Language = "en-US",
                 ProjectUrl = Uri("https://github.com/mausch/Fuchu")
             )
