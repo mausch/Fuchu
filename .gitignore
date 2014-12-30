@@ -3,11 +3,13 @@
 *.user
 *.userprefs
 *.pidb
-*/bin
-*/obj
+bin/
+obj/
 _ReSharper.*
 packages/*
 **/packages/*
 *.nupkg
 .nuget/*.exe
-*.sln.ide
+*.sln
+.ide
+paket.exe

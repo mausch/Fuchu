@@ -1,7 +1,7 @@
 #I @"packages/FAKE/tools/"
 #r @"FakeLib.dll"
 #r "System.Xml.Linq"
-#r ".nuget/NuGet.exe"
+#r "packages/NuGet.CommandLine/tools/NuGet.exe"
 
 open System
 open Fake
