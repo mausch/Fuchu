@@ -13,3 +13,6 @@ packages/*
 *.sln
 .ide
 paket.exe
+build/
+AssemblyVersionInfo.fs
+AssemblyVersionInfo.cs

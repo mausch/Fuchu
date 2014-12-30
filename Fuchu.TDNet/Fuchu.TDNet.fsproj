@@ -8,6 +8,7 @@
     <RootNamespace>Fuchu.TDNet</RootNamespace>
     <AssemblyName>Fuchu.TDNet</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Id>Fuchu-suave.TDNet</Id>
     <Name>Fuchu.TDNet</Name>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

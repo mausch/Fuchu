@@ -8,6 +8,7 @@
     <RootNamespace>Fuchu</RootNamespace>
     <AssemblyName>Fuchu</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Id>Fuchu-suave</Id>
     <Name>Fuchu</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
@@ -38,7 +39,7 @@
     <Reference Include="FSharp.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="AssemblyVersionInfo.fs" />
     <Compile Include="Fuchu.fs" />
     <Compile Include="Assertions.fs" />
     <Compile Include="xUnitHelpers.fs" />
