@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.FsCheck</RootNamespace>
     <AssemblyName>Fuchu.FsCheck</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Id>Fuchu-suave.FsCheck</Id>
     <Name>Fuchu.FsCheck</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
