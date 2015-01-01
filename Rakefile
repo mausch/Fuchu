@@ -52,6 +52,7 @@ directory 'build/pkg'
 
 desc 'package nugets - finds all projects and package them'
 nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
+  p.configuration = Configuration
   p.files   = FileList['**/*.{fsproj}'].
     exclude(/Tests/)
   p.out     = 'build/pkg'
