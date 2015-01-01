@@ -12,6 +12,8 @@ module PerfTests =
     type MySlowSerialiser() =
         interface ITestable with
             member x.Name = "Slow Serialiser"
+            member x.Init () = ()
+            member x.Fini () = ()
         interface Serialiser with
             member x.Serialise _ =
                 System.Threading.Thread.Sleep(30)
@@ -19,6 +21,8 @@ module PerfTests =
     type FastSerialiser() =
         interface ITestable with
             member x.Name = "Fast Serialiser"
+            member x.Init () = ()
+            member x.Fini () = ()
         interface Serialiser with
             member x.Serialise _ =
                 System.Threading.Thread.Sleep(10)
@@ -26,6 +30,8 @@ module PerfTests =
     type FastSerialiserAlt() =
         interface ITestable with
             member x.Name = "Fast Serialiser Alt"
+            member x.Init () = ()
+            member x.Fini () = ()
         interface Serialiser with
             member x.Serialise _ =
                 System.Threading.Thread.Sleep(20)
@@ -34,9 +40,9 @@ module PerfTests =
     let subj = MySlowSerialiser() :> Serialiser
 
     let normal_serialisation : PerfTest<Serialiser> list = [
-        perfTest "serialising string" <| fun s ->
+        perfTest' "serialising string" <| fun s ->
             s.Serialise("wowowow")
-        perfTest "serialising record" <| fun s ->
+        perfTest' "serialising record" <| fun s ->
             s.Serialise { a = "hello world"; b = 42 }
         ]
 

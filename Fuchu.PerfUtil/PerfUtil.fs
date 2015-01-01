@@ -20,6 +20,13 @@ module FuchuPerfUtil =
           Test        = testImpl
           Repeat      = repeat }
 
+    /// Create a new performance test wth 5 repeats. The values given from this method are usable both
+    /// by PerfUtil as well as Fuchu's testPerfImplsWithConfig, testPerfImpls,
+    /// testPerfHistoryWithConfig and testPerfHistory. You can give the values from this
+    /// function to both Fuchu and PerfUtil.
+    let perfTest' name testImpl =
+      perfTest name testImpl 5
+
     type PerfImplsConf =
           /// <summary>
           /// Whether to throw <see cref="PerfUtil.PerformanceException" />
