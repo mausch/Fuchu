@@ -1,7 +1,6 @@
-#I @"packages/FAKE/tools/"
+#I @"packages/Build/FAKE/tools/"
 #r @"FakeLib.dll"
 #r "System.Xml.Linq"
-#r ".nuget/NuGet.exe"
 
 open System
 open Fake
@@ -16,71 +15,33 @@ type Package = {
     Author: string
     Description: string
     Sign: bool
-    Dependencies: seq<string * string>
 }
-
-module Pkg =
-    open System
-    open System.IO
-    open System.Xml.Linq
-    open global.NuGet
-
-    let dependenciesFromConfig (path: string) = 
-        XDocument.Load(path @@ "packages.config").Root.Elements(XName.Get "package")
-        |> Seq.map (fun e -> e.Attribute(XName.Get "id").Value, e.Attribute(XName.Get "version").Value)
-        |> Seq.toList
-
-    let build (p: Package) =
-        let builder = 
-            PackageBuilder(
-                Id = p.Name,
-                Title = p.Name,
-                Version = SemanticVersion version,
-                Description = p.Description,
-                LicenseUrl = Uri("https://raw.githubusercontent.com/mausch/Fuchu/master/license.txt"),
-                Language = "en-US",
-                ProjectUrl = Uri("https://github.com/mausch/Fuchu")
-            )
-        builder.Authors.Add p.Author |> ignore
-        builder.Owners.Add "Mauricio Scheffer" |> ignore
-        let packageFiles =
-            ["pdb"; "xml"; "dll"]
-            |> Seq.collect (fun e -> !! (p.Name @@ "bin" @@ "Release" @@ (p.Name + "." + e)))
-            |> Seq.map (fun f -> PhysicalPackageFile(SourcePath = f, TargetPath = "lib" @@ Path.GetFileName f))
-        builder.Files.AddRange (packageFiles |> Seq.map (fun i -> upcast i))
-        if builder.Files.Count = 0 then failwithf "No files defined for package %s" p.Name
-        let deps = 
-            p.Dependencies
-            |> Seq.map (fun (id,v) -> PackageDependency(id = id, versionSpec = VersionUtility.ParseVersionSpec v))
-        builder.DependencySets.Add(PackageDependencySet(null, deps))
-        use fs = File.Create (sprintf "%s.%s%s" p.Name version Constants.PackageExtension)
-        builder.Save fs
+module Pkg=
+  let build (pkg:Package) = 
+    MSBuildRelease null "pack" ["./"+pkg.Name]
+    |> Log "Package-Output: "
 
 let packages = 
     [
         { Package.Name = "Fuchu"
           Author = "Mauricio Scheffer"
           Description = "Functional test library"
-          Sign = true
-          Dependencies = [("FSharp.Core", "3.1.2.1")] }
+          Sign = true}
 
         { Package.Name = "Fuchu.MbUnit"
           Author = "Mauricio Scheffer"
           Description = "Converts Fuchu tests to MbUnit tests"
-          Sign = true
-          Dependencies = ("Fuchu", version)::(Pkg.dependenciesFromConfig "Fuchu.MbUnit") }
+          Sign = true}
 
         { Package.Name = "Fuchu.FsCheck"
           Author = "Mauricio Scheffer"
           Description = "Integrates Fuchu with FsCheck"
-          Sign = false
-          Dependencies = ("Fuchu", version)::(Pkg.dependenciesFromConfig "Fuchu.FsCheck") }
+          Sign = false}
 
         { Package.Name = "Fuchu.PerfUtil"
           Author = "Henrik Feldt"
           Description = "Integrates Fuchu with PerfUtil"
-          Sign = false
-          Dependencies = ("Fuchu", version)::(Pkg.dependenciesFromConfig "Fuchu.PerfUtil") }
+          Sign = false}
     ]
 
 Target "BuildSolution" (fun _ ->

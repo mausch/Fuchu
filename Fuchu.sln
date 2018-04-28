@@ -3,23 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu", "Fuchu\Fuchu.fsproj", "{3527D6ED-FAAB-4339-9FA2-2EC3769F79D3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{2CD46E68-F3BD-473A-9841-1C7C7EA60B96}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.FsCheck", "Fuchu.FsCheck\Fuchu.FsCheck.fsproj", "{BF5283AA-486B-4DAF-8C57-E4FC572E73A2}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu", "Fuchu\Fuchu.fsproj", "{3527D6ED-FAAB-4339-9FA2-2EC3769F79D3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.MbUnit", "Fuchu.MbUnit\Fuchu.MbUnit.fsproj", "{15674017-71DC-466F-BC5C-F921574789CD}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.FsCheck", "Fuchu.FsCheck\Fuchu.FsCheck.fsproj", "{BF5283AA-486B-4DAF-8C57-E4FC572E73A2}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.PerfUtil", "Fuchu.PerfUtil\Fuchu.PerfUtil.fsproj", "{217E5EBF-CD06-49C5-A2B3-329853AF4EB7}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.MbUnit", "Fuchu.MbUnit\Fuchu.MbUnit.fsproj", "{15674017-71DC-466F-BC5C-F921574789CD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.PerfUtil.Charting", "Fuchu.PerfUtil.Charting\Fuchu.PerfUtil.Charting.fsproj", "{1EC0EB32-9068-48B7-8B3E-4DD98809758B}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.PerfUtil", "Fuchu.PerfUtil\Fuchu.PerfUtil.fsproj", "{217E5EBF-CD06-49C5-A2B3-329853AF4EB7}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.TDNet", "Fuchu.TDNet\Fuchu.TDNet.fsproj", "{D3315AB4-C787-4847-9976-D9040A64EC85}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.PerfUtil.Charting", "Fuchu.PerfUtil.Charting\Fuchu.PerfUtil.Charting.fsproj", "{1EC0EB32-9068-48B7-8B3E-4DD98809758B}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.TeamCity", "Fuchu.TeamCity\Fuchu.TeamCity.fsproj", "{0B672BF4-FFEA-47FC-B142-0A7638C8985D}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.TDNet", "Fuchu.TDNet\Fuchu.TDNet.fsproj", "{D3315AB4-C787-4847-9976-D9040A64EC85}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fuchu.Tests", "Fuchu.Tests\Fuchu.Tests.fsproj", "{A01A13AA-9F3C-4D76-BF2B-C8DC276854B5}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.TeamCity", "Fuchu.TeamCity\Fuchu.TeamCity.fsproj", "{0B672BF4-FFEA-47FC-B142-0A7638C8985D}"
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fuchu.Tests", "Fuchu.Tests\Fuchu.Tests.fsproj", "{A01A13AA-9F3C-4D76-BF2B-C8DC276854B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fuchu.CSharpTests", "Fuchu.CSharpTests\Fuchu.CSharpTests.csproj", "{F245D5AA-37BE-4605-81CB-7E6E1FC6F572}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{022D14E1-AEC2-4C33-B6C1-D4D71557D2DA}"
+	ProjectSection(SolutionItems) = preProject
+		build.fsx = build.fsx
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

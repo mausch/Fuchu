@@ -6,6 +6,7 @@
     <AssemblyName>Fuchu.Tests</AssemblyName>
     <TargetFrameworks>net45</TargetFrameworks>
     <Name>Fuchu.Tests</Name>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Prelude.fs" />
@@ -27,7 +28,5 @@
     <ProjectReference Include="..\Fuchu.TeamCity\Fuchu.TeamCity.fsproj" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.10.1" />
-  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

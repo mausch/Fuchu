@@ -1,0 +1,14 @@
+source https://api.nuget.org/v3/index.json
+
+nuget FsCheck >= 2.10.0
+nuget FSharp.Charting 0.91.1
+nuget FSharp.Core >= 4.3.0
+nuget Gallio_MbUnit >= 3.4.0
+nuget NUnit 3.10.1
+nuget PerfUtil 0.1.8
+nuget TestDriven.Framework 2.0.0-alpha2 prerelease
+
+group Build
+  source https://api.nuget.org/v3/index.json
+  
+  nuget FAKE

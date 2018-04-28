@@ -6,6 +6,8 @@
     <AssemblyName>Fuchu.MbUnit</AssemblyName>
     <TargetFrameworks>net45</TargetFrameworks>
     <Name>Fuchu.MbUnit</Name>
+    <Authors>Mauricio Scheffer</Authors>
+    <Description>Converts Fuchu tests to MbUnit tests</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -13,10 +15,7 @@
     <Compile Include="FuchuTestToMbUnit.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="Gallio_MbUnit" Version="3.4.*" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

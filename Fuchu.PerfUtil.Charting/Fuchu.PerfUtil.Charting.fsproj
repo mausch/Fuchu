@@ -6,15 +6,11 @@
     <AssemblyName>Fuchu.PerfUtil.Charting</AssemblyName>
     <TargetFrameworks>net45</TargetFrameworks>
     <Name>Fuchu.PerfUtil.Charting</Name>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Charting.fs" />
     <Content Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="PerfUtil" Version="0.1.8" />
-    <PackageReference Include="FSharp.Charting" Version="0.91.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
@@ -26,4 +22,5 @@
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <ProjectReference Include="..\Fuchu.PerfUtil\Fuchu.PerfUtil.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

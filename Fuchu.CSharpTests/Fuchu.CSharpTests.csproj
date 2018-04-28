@@ -8,12 +8,9 @@
     <TargetFrameworks>net45</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="FsCheck" Version="2.10.*" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Fuchu.FsCheck\Fuchu.FsCheck.fsproj" />
     <ProjectReference Include="..\Fuchu.TDNet\Fuchu.TDNet.fsproj" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

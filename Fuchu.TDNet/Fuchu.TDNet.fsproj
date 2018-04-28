@@ -11,8 +11,7 @@
     <Compile Include="FuchuRunner.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="TestDriven.Framework" Version="2.0.0-alpha2" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

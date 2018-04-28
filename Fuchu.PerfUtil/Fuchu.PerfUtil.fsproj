@@ -7,6 +7,9 @@
     <TargetFrameworks>net45</TargetFrameworks>
     <Name>Fuchu.PerfUtil</Name>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Authors>Henrik Feldt</Authors>
+    <Description>Integrates Fuchu with PerfUtil</Description>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
@@ -14,10 +17,7 @@
     <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="PerfUtil" Version="0.1.8" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -6,6 +6,8 @@
     <RootNamespace>Fuchu.FsCheck</RootNamespace>
     <AssemblyName>Fuchu.FsCheck</AssemblyName>
     <Name>Fuchu.FsCheck</Name>
+    <Authors>Mauricio Scheffer</Authors>
+    <Description>Integrates Fuchu with FsCheck</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -13,10 +15,7 @@
     <Compile Include="FsCheck.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*" />
-    <PackageReference Include="FsCheck" Version="2.10.*" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
