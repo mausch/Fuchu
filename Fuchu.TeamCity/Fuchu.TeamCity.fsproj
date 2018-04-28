@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{c316cfaa-13f8-452a-ada1-1ab9535aa25d}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.TeamCity</RootNamespace>
     <AssemblyName>Fuchu.TeamCity</AssemblyName>
@@ -12,7 +11,7 @@
     <Compile Include="Runner.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*"/>
+    <PackageReference Include="FSharp.Core" Version="4.3.*" />
     <!-- 
     Can this be used: 
     https://www.nuget.org/packages/TeamCity.Dotnet.Integration/1.0.0

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>550f5832-d52f-4c7a-8aa0-0b35a145637f</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.MbUnit</RootNamespace>
     <AssemblyName>Fuchu.MbUnit</AssemblyName>
@@ -14,10 +13,10 @@
     <Compile Include="FuchuTestToMbUnit.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*"/>
-    <PackageReference Include="Gallio_MbUnit" Version="3.4.*"/>
+    <PackageReference Include="FSharp.Core" Version="4.3.*" />
+    <PackageReference Include="Gallio_MbUnit" Version="3.4.*" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fuchu\Fuchu.fsproj"/>
+    <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
 </Project>

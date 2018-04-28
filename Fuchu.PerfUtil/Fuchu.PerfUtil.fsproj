@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>ae969ed0-0a3b-44b3-8459-4f19e486434a</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.PerfUtil</RootNamespace>
     <AssemblyName>Fuchu.PerfUtil</AssemblyName>
@@ -15,8 +14,8 @@
     <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*"/>
-    <PackageReference Include="PerfUtil" Version="0.1.8"/>
+    <PackageReference Include="FSharp.Core" Version="4.3.*" />
+    <PackageReference Include="PerfUtil" Version="0.1.8" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />

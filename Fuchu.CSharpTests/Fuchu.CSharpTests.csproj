@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{5ED1DDC5-9B80-4F5C-BFDD-B5EC9C143AE3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fuchu.CSharpTests</RootNamespace>
@@ -9,15 +8,12 @@
     <TargetFrameworks>net45</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.3.*"/>
-    <PackageReference Include="FsCheck" Version="2.10.*"/>
+    <PackageReference Include="FSharp.Core" Version="4.3.*" />
+    <PackageReference Include="FsCheck" Version="2.10.*" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fuchu.FsCheck\Fuchu.FsCheck.fsproj"/>
-    <ProjectReference Include="..\Fuchu.TDNet\Fuchu.TDNet.fsproj"/>
-    <ProjectReference Include="..\Fuchu\Fuchu.fsproj"/>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\Fuchu.FsCheck\Fuchu.FsCheck.fsproj" />
+    <ProjectReference Include="..\Fuchu.TDNet\Fuchu.TDNet.fsproj" />
+    <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
 </Project>
