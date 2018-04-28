@@ -22,7 +22,7 @@ let vsProjProps = [
 
 module Pkg=
   let build (pkg:Package) = 
-    MSBuildReleaseExt null vsProjProps "pack" ["./"+pkg.Name]
+    MSBuildReleaseExt null vsProjProps "pack" ["./"+pkg.Name @@ pkg.Name+".fsproj"]
     |> Log "Package-Output: "
 
 let packages = 
