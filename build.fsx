@@ -80,7 +80,7 @@ Target "Test" <| fun _ ->
             "Fuchu.Tests"
             "Fuchu.CSharpTests"
         ]
-        |> Seq.map (fun t -> t @@ "bin" @@ "Release" @@ (t + ".exe"))
+        |> Seq.map (fun t -> t @@ "bin" @@ "Release" @@ "net45" @@ (t + ".exe"))
         |> Seq.map (fun p -> if not isMono then p,null else "mono",p)
         |> Seq.map (fun (p,a) -> asyncShellExec { defaultParams with Program = p; CommandLine = a })
         |> Async.Parallel
