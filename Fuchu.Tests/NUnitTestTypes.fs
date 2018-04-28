@@ -14,12 +14,11 @@ module NUnitTestTypes =
         member x.AnotherTest() = Assert.Fail()
 
         [<Test>]
-        [<ExpectedException(typeof<ArgumentException>)>]
         member x.ATestWithExpectedException() : unit = 
-            invalidArg "" ""
+            Assert.Throws<ArgumentException>( fun _ -> invalidArg "" "" ) |> ignore
 
         [<Test>]
-        [<Ignore>]
+        [<Ignore("")>]
         member x.IgnoredTest() = ()
 
     type ATestFixtureWithSetup() =

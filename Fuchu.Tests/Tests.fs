@@ -1,7 +1,8 @@
 namespace Fuchu
 
 open System
-
+module Strings=
+  let inline contains substr (t: string) = t.Contains substr
 module Dummy =
     open Fuchu
 
@@ -24,7 +25,6 @@ module Tests =
     open Fuchu.Impl
     open System.Threading
     open System.IO
-    open FSharpx
     open System.Globalization
 
     let (==?) actual expected = Assert.Equal("", expected, actual)

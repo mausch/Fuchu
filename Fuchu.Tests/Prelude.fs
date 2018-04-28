@@ -1,7 +1,6 @@
 ﻿namespace Fuchu
 
 open System
-open FSharpx
                 
 module Seq = 
     let (|Empty|Cons|) l = 
@@ -29,7 +28,7 @@ module String =
             f b a
 
     let internal nullOption2 f a b =
-        nullBool2 f a b |> Option.ofBool
+        nullBool2 f a b |> function true -> Some() | false -> None
 
     let (|StartsWith|_|) =
         nullOption2 (fun (s: string) -> s.StartsWith)
