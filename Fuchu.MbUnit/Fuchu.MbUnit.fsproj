@@ -9,6 +9,8 @@
     <Authors>Mauricio Scheffer</Authors>
     <Description>Converts Fuchu tests to MbUnit tests</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />

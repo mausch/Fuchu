@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.FsCheck</RootNamespace>
     <AssemblyName>Fuchu.FsCheck</AssemblyName>
@@ -9,6 +9,8 @@
     <Authors>Mauricio Scheffer</Authors>
     <Description>Integrates Fuchu with FsCheck</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />

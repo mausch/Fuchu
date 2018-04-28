@@ -4,7 +4,6 @@
 
 open System
 open Fake
-open Fake.ProcessHelper
 open Fake.AssemblyInfoFile
 
 let version = "1.0.3.0"
@@ -16,9 +15,14 @@ type Package = {
     Description: string
     Sign: bool
 }
+let vsProjProps = [
+     ("VersionSuffix", "")
+     ("VersionPrefix", version)
+]
+
 module Pkg=
   let build (pkg:Package) = 
-    MSBuildRelease null "pack" ["./"+pkg.Name]
+    MSBuildReleaseExt null vsProjProps "pack" ["./"+pkg.Name]
     |> Log "Package-Output: "
 
 let packages = 

@@ -10,6 +10,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Authors>Henrik Feldt</Authors>
     <Description>Integrates Fuchu with PerfUtil</Description>
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
