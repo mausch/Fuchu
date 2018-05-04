@@ -17,7 +17,7 @@ let plot yaxis (metric : PerfResult -> float) (results : PerfResult list) =
     Chart.Bar(values, ?Name = name, ?Title = name, YTitle = yaxis)
     |> Chart.WithYAxis(MajorGrid = dashGrid)
     |> Chart.WithXAxis(MajorGrid = dashGrid)
-    |> fun ch -> ch.ShowChart()
+    |> fun ch -> ch.ShowChart() |> ignore
 
 let plotMS (results : TestSession list) = 
     results 

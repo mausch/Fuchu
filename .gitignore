@@ -11,3 +11,6 @@ packages/*
 *.nupkg
 .nuget/*.exe
 *.sln.ide
+.vs/
+paket-files
+.fake/

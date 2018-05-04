@@ -36,7 +36,7 @@ module Helpers =
     /// Print to Console and Trace
     let tprintf fmt = 
         Printf.kprintf (fun s -> 
-                            System.Diagnostics.Trace.Write s
+                            //System.Diagnostics.Trace.Write s
                             Console.Write s) fmt
 
     open System.Text.RegularExpressions
