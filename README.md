@@ -12,6 +12,12 @@ much cheaper.
 
 Binaries are available on [NuGet](http://nuget.org/packages?q=Fuchu).
 
+## Source ##
+
+Add the following line to your paket.dependencies file
+
+    github mausch/Fuchu Fuchu/Fuchu.fs
+
 ## Writing tests ##
 
 Here's the simplest test possible:
