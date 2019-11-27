@@ -4,18 +4,18 @@ open System.Reflection
 
 [<assembly: AssemblyKeyFileAttribute("../Fuchu.snk")>]
 [<assembly: AssemblyVersionAttribute("1.0.0.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.0.3.0")>]
+[<assembly: AssemblyFileVersionAttribute("1.1.0.0")>]
 [<assembly: AssemblyTitleAttribute("Fuchu")>]
 [<assembly: AssemblyProductAttribute("Fuchu")>]
 [<assembly: AssemblyDescriptionAttribute("Functional test library")>]
-[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2018")>]
+[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2019")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyKeyFile = "../Fuchu.snk"
     let [<Literal>] AssemblyVersion = "1.0.0.0"
-    let [<Literal>] AssemblyFileVersion = "1.0.3.0"
+    let [<Literal>] AssemblyFileVersion = "1.1.0.0"
     let [<Literal>] AssemblyTitle = "Fuchu"
     let [<Literal>] AssemblyProduct = "Fuchu"
     let [<Literal>] AssemblyDescription = "Functional test library"
-    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2018"
+    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2019"

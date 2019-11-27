@@ -6,7 +6,7 @@ open System
 open Fake
 open Fake.AssemblyInfoFile
 
-let version = "1.0.3.0"
+let version = "1.1.0.0"
 let assemblyVersion = "1.0.0.0"
 
 type Package = {

@@ -3,17 +3,17 @@ namespace System
 open System.Reflection
 
 [<assembly: AssemblyVersionAttribute("1.0.0.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.0.3.0")>]
+[<assembly: AssemblyFileVersionAttribute("1.1.0.0")>]
 [<assembly: AssemblyTitleAttribute("Fuchu.PerfUtil")>]
 [<assembly: AssemblyProductAttribute("Fuchu.PerfUtil")>]
 [<assembly: AssemblyDescriptionAttribute("Integrates Fuchu with PerfUtil")>]
-[<assembly: AssemblyCopyrightAttribute("Copyright Henrik Feldt 2018")>]
+[<assembly: AssemblyCopyrightAttribute("Copyright Henrik Feldt 2019")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyVersion = "1.0.0.0"
-    let [<Literal>] AssemblyFileVersion = "1.0.3.0"
+    let [<Literal>] AssemblyFileVersion = "1.1.0.0"
     let [<Literal>] AssemblyTitle = "Fuchu.PerfUtil"
     let [<Literal>] AssemblyProduct = "Fuchu.PerfUtil"
     let [<Literal>] AssemblyDescription = "Integrates Fuchu with PerfUtil"
-    let [<Literal>] AssemblyCopyright = "Copyright Henrik Feldt 2018"
+    let [<Literal>] AssemblyCopyright = "Copyright Henrik Feldt 2019"
