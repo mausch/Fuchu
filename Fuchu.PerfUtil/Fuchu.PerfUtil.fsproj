@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.PerfUtil</RootNamespace>
     <AssemblyName>Fuchu.PerfUtil</AssemblyName>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net452</TargetFrameworks>
     <Name>Fuchu.PerfUtil</Name>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -12,14 +12,17 @@
     <Description>Integrates Fuchu with PerfUtil</Description>
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
     <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
+
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="PerfUtil.fs" />
-    <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+    <PackageReference Include="PerfUtil" Version="0.1.8" />
+  </ItemGroup>
 </Project>

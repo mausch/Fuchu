@@ -1,10 +1,19 @@
-#I @"packages/Build/FAKE/tools/"
-#r @"FakeLib.dll"
-#r "System.Xml.Linq"
-
+#load ".fake/build.fsx/intellisense.fsx"
+#if !FAKE
+#r "Facades/netstandard"
+#r "netstandard"
+#endif
 open System
-open Fake
-open Fake.AssemblyInfoFile
+open Fake.SystemHelper
+open Fake.Core
+open Fake.DotNet
+open Fake.Tools
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.IO.Globbing.Operators
+open Fake.Core.TargetOperators
+open Fake.Api
+open Fake.BuildServer
 
 let version = "1.1.0.0"
 let assemblyVersion = "1.0.0.0"
@@ -22,9 +31,8 @@ let vsProjProps = [
 
 module Pkg=
   let build (pkg:Package) = 
-    MSBuildReleaseExt null vsProjProps "pack" ["./"+pkg.Name @@ pkg.Name+".fsproj"]
-    |> Log "Package-Output: "
-
+    MSBuild.runReleaseExt id null vsProjProps "pack" ["./"+pkg.Name @@ pkg.Name+".fsproj"]
+    |> ignore
 let packages = 
     [
         { Package.Name = "Fuchu"
@@ -48,41 +56,40 @@ let packages =
           Sign = false}
     ]
 
-Target "BuildSolution" (fun _ ->
-    MSBuildRelease null "Rebuild" ["./Fuchu.sln"]
-    |> Log "AppBuild-Output: "
+Target.create "BuildSolution" (fun _ ->
+    MSBuild.runRelease id null "Rebuild" ["./Fuchu.sln"] |> ignore
 )
 
-Target "NuGet" <| fun _ ->
+Target.create "NuGet" <| fun _ ->
     List.iter Pkg.build packages
 
 
-Target "AssemblyInfo" <| fun _ ->
+Target.create "AssemblyInfo" <| fun _ ->
     let asmInfo (p: Package) =
         let attributes = [
-            Attribute.Version assemblyVersion
-            Attribute.FileVersion version
-            Attribute.Title p.Name
-            Attribute.Product p.Name
-            Attribute.Description p.Description
-            Attribute.Copyright (sprintf "Copyright %s %d" p.Author DateTime.Now.Year)
+            AssemblyInfo.Version assemblyVersion
+            AssemblyInfo.FileVersion version
+            AssemblyInfo.Title p.Name
+            AssemblyInfo.Product p.Name
+            AssemblyInfo.Description p.Description
+            AssemblyInfo.Copyright (sprintf "Copyright %s %d" p.Author DateTime.Now.Year)
         ]
         let attributes = 
             if p.Sign 
-                then (Attribute.KeyFile "../Fuchu.snk")::attributes
+                then (AssemblyInfo.KeyFile "../Fuchu.snk")::attributes
                 else attributes
-        CreateFSharpAssemblyInfo (p.Name @@ "AssemblyInfo.fs") attributes
+        AssemblyInfoFile.createFSharp (p.Name @@ "AssemblyInfo.fs") attributes
     List.iter asmInfo packages
 
-Target "Test" <| fun _ ->
+Target.create "Test" <| fun _ ->
     let errorCode = 
         [
             "Fuchu.Tests"
             "Fuchu.CSharpTests"
         ]
-        |> Seq.map (fun t -> t @@ "bin" @@ "Release" @@ "net45" @@ (t + ".exe"))
-        |> Seq.map (fun p -> if not isMono then p,null else "mono",p)
-        |> Seq.map (fun (p,a) -> asyncShellExec { defaultParams with Program = p; CommandLine = a })
+        |> Seq.map (fun t -> t @@ "bin" @@ "Release" @@ "net452" @@ (t + ".exe"))
+        |> Seq.map (fun p -> if not Environment.isMono then p,null else "mono",p)
+        |> Seq.map (fun (p,a) -> Process.asyncShellExec { ExecParams.Empty with Program = p; CommandLine = a })
         |> Async.Parallel
         |> Async.RunSynchronously
         |> Array.sum
@@ -92,4 +99,4 @@ Target "Test" <| fun _ ->
 "Test" <== ["BuildSolution"]
 "NuGet" <== ["Test"]
 
-RunTargetOrDefault "NuGet"
+Target.runOrDefaultWithArguments "NuGet"

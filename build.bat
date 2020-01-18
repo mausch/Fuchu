@@ -1,9 +1,10 @@
-@echo off
+echo Restoring dotnet tools...
+dotnet tool restore
 
-cls
-.paket\paket.exe restore
-if errorlevel 1 (
-  exit /b %errorlevel%
+SET PAKET_TOOL_PATH=.paket
+
+IF NOT EXIST "%PAKET_TOOL_PATH%\paket.exe" (
+  dotnet tool install paket --tool-path ./%PAKET_TOOL_PATH%
 )
 
-"packages\build\FAKE\tools\Fake.exe" "build.fsx" %*
+dotnet fake build -t %*

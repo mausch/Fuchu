@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.MbUnit</RootNamespace>
     <AssemblyName>Fuchu.MbUnit</AssemblyName>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net452</TargetFrameworks>
     <Name>Fuchu.MbUnit</Name>
     <Authors>Mauricio Scheffer</Authors>
     <Description>Converts Fuchu tests to MbUnit tests</Description>
@@ -19,5 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Gallio_MbUnit" Version="3.4.14.0" />
+  </ItemGroup>
 </Project>

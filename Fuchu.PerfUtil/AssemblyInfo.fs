@@ -7,7 +7,7 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("Fuchu.PerfUtil")>]
 [<assembly: AssemblyProductAttribute("Fuchu.PerfUtil")>]
 [<assembly: AssemblyDescriptionAttribute("Integrates Fuchu with PerfUtil")>]
-[<assembly: AssemblyCopyrightAttribute("Copyright Henrik Feldt 2019")>]
+[<assembly: AssemblyCopyrightAttribute("Copyright Henrik Feldt 2020")>]
 do ()
 
 module internal AssemblyVersionInformation =
@@ -16,4 +16,4 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Fuchu.PerfUtil"
     let [<Literal>] AssemblyProduct = "Fuchu.PerfUtil"
     let [<Literal>] AssemblyDescription = "Integrates Fuchu with PerfUtil"
-    let [<Literal>] AssemblyCopyright = "Copyright Henrik Feldt 2019"
+    let [<Literal>] AssemblyCopyright = "Copyright Henrik Feldt 2020"

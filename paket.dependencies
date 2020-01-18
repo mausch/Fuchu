@@ -1,14 +1,21 @@
+source https://www.nuget.org/api/v2
 source https://api.nuget.org/v3/index.json
+storage: none
 
-nuget FsCheck >= 2.10.0
-nuget FSharp.Charting 0.91.1
-nuget FSharp.Core >= 4.3.0
-nuget Gallio_MbUnit >= 3.4.0
-nuget NUnit 3.10.1
-nuget PerfUtil 0.1.8
-nuget TestDriven.Framework 2.0.0-alpha2 prerelease
-
+// [ FAKE GROUP ]
 group Build
-  source https://api.nuget.org/v3/index.json
-  
-  nuget FAKE
+    storage: none
+    source https://www.nuget.org/api/v2
+    source https://api.nuget.org/v3/index.json
+    nuget Fake.IO.FileSystem
+    nuget Fake.Core.Target
+    nuget Fake.Core.ReleaseNotes
+    nuget FAKE.Core.Environment
+    nuget Fake.DotNet.Cli
+    nuget FAKE.Core.Process
+    nuget Fake.DotNet.AssemblyInfoFile
+    nuget Fake.Tools.Git
+    nuget Fake.DotNet.Paket
+    nuget Fake.Api.GitHub
+    nuget Fake.BuildServer.AppVeyor
+    nuget Fake.BuildServer.Travis
