@@ -2,7 +2,6 @@
 namespace System
 open System.Reflection
 
-[<assembly: AssemblyKeyFileAttribute("../Fuchu.snk")>]
 [<assembly: AssemblyVersionAttribute("1.0.0.0")>]
 [<assembly: AssemblyFileVersionAttribute("1.1.0.0")>]
 [<assembly: AssemblyTitleAttribute("Fuchu.MbUnit")>]
@@ -12,7 +11,6 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] AssemblyKeyFile = "../Fuchu.snk"
     let [<Literal>] AssemblyVersion = "1.0.0.0"
     let [<Literal>] AssemblyFileVersion = "1.1.0.0"
     let [<Literal>] AssemblyTitle = "Fuchu.MbUnit"

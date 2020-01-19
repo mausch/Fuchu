@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.PerfUtil</RootNamespace>
     <AssemblyName>Fuchu.PerfUtil</AssemblyName>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <Name>Fuchu.PerfUtil</Name>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

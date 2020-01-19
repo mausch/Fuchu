@@ -43,7 +43,7 @@ let packages =
         { Package.Name = "Fuchu.MbUnit"
           Author = "Mauricio Scheffer"
           Description = "Converts Fuchu tests to MbUnit tests"
-          Sign = true}
+          Sign = false}
 
         { Package.Name = "Fuchu.FsCheck"
           Author = "Mauricio Scheffer"
@@ -57,6 +57,8 @@ let packages =
     ]
 
 Target.create "BuildSolution" (fun _ ->
+    MSBuild.runRelease id null "Restore" ["./Fuchu.sln"] |> ignore
+
     MSBuild.runRelease id null "Rebuild" ["./Fuchu.sln"] |> ignore
 )
 
@@ -87,12 +89,15 @@ Target.create "Test" <| fun _ ->
             "Fuchu.Tests"
             "Fuchu.CSharpTests"
         ]
-        |> Seq.map (fun t -> t @@ "bin" @@ "Release" @@ "net452" @@ (t + ".exe"))
-        |> Seq.map (fun p -> if not Environment.isMono then p,null else "mono",p)
-        |> Seq.map (fun (p,a) -> Process.asyncShellExec { ExecParams.Empty with Program = p; CommandLine = a })
-        |> Async.Parallel
-        |> Async.RunSynchronously
-        |> Array.sum
+        |> List.sumBy (fun t -> 
+            let r=
+                RawCommand( t @@ "bin" @@ "Release" @@ "net452" @@ (t + ".exe"), Arguments.Empty)
+                |> CreateProcess.fromCommand 
+                |> CreateProcess.withToolType ( ToolType.Create() )
+                |> CreateProcess.withTimeout (TimeSpan.FromSeconds 10.)
+                |> Proc.run
+            r.ExitCode
+        )
     if errorCode <> 0 then failwith "Error in tests"
 
 "BuildSolution" <== ["AssemblyInfo"]
