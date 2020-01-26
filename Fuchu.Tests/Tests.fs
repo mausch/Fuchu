@@ -2,7 +2,7 @@ namespace Fuchu
 
 open System
 module Strings=
-  let inline contains substr (t: string) = t.Contains substr
+  let contains (substr:string) (t: string) = t.Contains substr
 module Dummy =
     open Fuchu
 

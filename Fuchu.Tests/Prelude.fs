@@ -53,8 +53,22 @@ module TestHelpers =
 
     let genLimitedTimeSpan = 
         lazy (
-            Arb.generate<TimeSpan> 
-            |> Gen.suchThat (fun t -> t.Days = 0)
+            let max = TimeSpan.FromDays(1.)
+            let genTimeSpan = Gen.choose (0, int max.Ticks) |> Gen.map (int64 >> TimeSpan)
+            let shrink (t: TimeSpan) = 
+                if t.Days <> 0 then
+                    seq { yield TimeSpan(0, t.Hours, t.Minutes, t.Seconds, t.Milliseconds) }
+                elif t.Hours <> 0 then
+                    seq { yield TimeSpan(0, 0, t.Minutes, t.Seconds, t.Milliseconds) }
+                elif t.Minutes <> 0 then
+                    seq { yield TimeSpan(0, 0, 0, t.Seconds, t.Milliseconds) }
+                elif t.Seconds <> 0 then
+                    seq { yield TimeSpan(0, 0, 0, 0, t.Milliseconds) }
+                elif t.Milliseconds <> 0 then
+                    seq { yield TimeSpan.Zero }
+                else
+                    Seq.empty
+            Arb.fromGenShrink (genTimeSpan, shrink)
         )
 
     let genTestResultCounts = 
@@ -64,7 +78,7 @@ module TestHelpers =
                 let! ignored = Arb.generate<int>
                 let! failed = Arb.generate<int>
                 let! errored = Arb.generate<int>
-                let! time = genLimitedTimeSpan.Value
+                let! time = genLimitedTimeSpan.Value.Generator
                 return {
                     TestResultCounts.Passed = passed
                     Ignored = ignored

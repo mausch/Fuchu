@@ -7,7 +7,7 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("Fuchu.FsCheck")>]
 [<assembly: AssemblyProductAttribute("Fuchu.FsCheck")>]
 [<assembly: AssemblyDescriptionAttribute("Integrates Fuchu with FsCheck")>]
-[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2019")>]
+[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2020")>]
 do ()
 
 module internal AssemblyVersionInformation =
@@ -16,4 +16,4 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Fuchu.FsCheck"
     let [<Literal>] AssemblyProduct = "Fuchu.FsCheck"
     let [<Literal>] AssemblyDescription = "Integrates Fuchu with FsCheck"
-    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2019"
+    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2020"

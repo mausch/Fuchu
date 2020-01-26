@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.FsCheck</RootNamespace>
     <AssemblyName>Fuchu.FsCheck</AssemblyName>
@@ -19,5 +19,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+    <PackageReference Include="FsCheck" Version="2.14.0" />
+  </ItemGroup>
 </Project>

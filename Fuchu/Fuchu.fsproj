@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu</RootNamespace>
     <AssemblyName>Fuchu</AssemblyName>
@@ -11,13 +11,15 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
     <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
+
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Fuchu.fs" />
     <Compile Include="xUnitHelpers.fs" />
     <Compile Include="Fuchu.NUnit.fs" />
     <Compile Include="Fuchu.MbUnit.fs" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+  </ItemGroup>
 </Project>

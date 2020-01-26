@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Fuchu.Tests</RootNamespace>
     <AssemblyName>Fuchu.Tests</AssemblyName>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net452;netcoreapp2.1</TargetFrameworks>
     <Name>Fuchu.Tests</Name>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -19,7 +19,6 @@
     <Compile Include="PerfTests.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
-    <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuchu.FsCheck\Fuchu.FsCheck.fsproj" />
@@ -28,5 +27,8 @@
     <ProjectReference Include="..\Fuchu.TeamCity\Fuchu.TeamCity.fsproj" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+  </ItemGroup>
 </Project>

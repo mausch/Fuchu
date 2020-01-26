@@ -8,7 +8,7 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("Fuchu")>]
 [<assembly: AssemblyProductAttribute("Fuchu")>]
 [<assembly: AssemblyDescriptionAttribute("Functional test library")>]
-[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2019")>]
+[<assembly: AssemblyCopyrightAttribute("Copyright Mauricio Scheffer 2020")>]
 do ()
 
 module internal AssemblyVersionInformation =
@@ -18,4 +18,4 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Fuchu"
     let [<Literal>] AssemblyProduct = "Fuchu"
     let [<Literal>] AssemblyDescription = "Functional test library"
-    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2019"
+    let [<Literal>] AssemblyCopyright = "Copyright Mauricio Scheffer 2020"
