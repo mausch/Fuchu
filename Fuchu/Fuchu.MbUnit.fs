@@ -1,5 +1,5 @@
 ﻿namespace Fuchu
-
+#if !FABLE_COMPILER
 module MbUnit =
     open Fuchu
     open System
@@ -100,3 +100,4 @@ module MbUnit =
             if staticTests.Length > 0 then
                 yield testList (t.FullName + testCategory t) staticTests
         })
+#endif

@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "pretest": "dotnet fable Fuchu.FableTests --outDir bin",
+    "test": "node --eval \"require('esm')(module)('./bin/Main.js')\" ./bin/Main.js ./bin/Main.js ./bin /d"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "isomorphic-fetch": "^3.0.0",
+    "minimist": "^1.2.5",
+    "mocha": "^7.1.0"
+  },
+  "name": "tests"
+}
