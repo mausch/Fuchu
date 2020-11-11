@@ -1,5 +1,5 @@
 ﻿namespace Fuchu
-
+#if !FABLE_COMPILER
 module NUnit =
     open Fuchu
     open System
@@ -21,3 +21,4 @@ module NUnit =
         let getCategory _ = ""
         let methods = getTestMethods getCategory nUnitAttrs t
         TestToFuchu nUnitAttrs getCategory t methods
+#endif

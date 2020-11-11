@@ -4,6 +4,7 @@
 *.userprefs
 *.pidb
 */bin
+*/Debug
 */obj
 _ReSharper.*
 packages/*
@@ -15,4 +16,7 @@ packages/*
 paket-files
 .fake/
 .ionide/
+.idea/
+node_modules/
+bin/
 
