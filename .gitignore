@@ -14,6 +14,7 @@ packages/*
 *.sln.ide
 .vs/
 paket-files
+.paket/
 .fake/
 .ionide/
 .idea/
