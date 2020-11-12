@@ -44,6 +44,14 @@ module Tests =
                     let t = Test.filter ((=) "z") tests |> Test.toTestCodeList |> Seq.toList
                     t.Length ==? 0
             ]
+            testList "Exception handling" [
+                testCase "Fuchu ignore" <| fun _ ->
+                    let test () = skiptest "b"
+                    let test = TestCase test
+                    match evalSilent test with
+                    | [{ Result = Ignored "b" }] -> ()
+                    | x -> failtestf "Expected result = Ignored, got\n %A" x
+            ]
 
             (*testList "Timeout" [
                 testCaseAsync "fail" <| fun _ -> async{
