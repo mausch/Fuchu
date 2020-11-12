@@ -20,9 +20,7 @@ type Test =
 type FuchuException(msg) = inherit Exception(msg)
 type AssertException(msg) = inherit FuchuException(msg)
 
-#if !FABLE_COMPILER
 type IgnoreException(msg) = inherit FuchuException(msg)
-#endif
 
 #if !FABLE_COMPILER
 /// Marks a top-level test for scanning
@@ -81,8 +79,12 @@ module Helpers =
     #else
     let rx = lazy Regex(" at (.*) in (.*):line (\d+)", RegexOptions.Compiled ||| RegexOptions.Multiline)
     #endif
-    let stackTraceToString s = rx.Value.Replace(s, "$2($3,1): $1")
+    let stackTraceToString s = if isNull s then "" else rx.Value.Replace(s, "$2($3,1): $1")
+    #if FABLE_COMPILER
+    let exnToString (e: Exception) = sprintf "%O : %s %s" e e.Message (stackTraceToString e.StackTrace)
+    #else
     let exnToString (e: Exception) = stackTraceToString (e.ToString())
+    #endif
 
     module Seq =
         let cons x xs = seq { yield x; yield! xs }
@@ -357,6 +359,29 @@ module Impl =
                 { Name = name
                   Result = TestResult.Error e
                   Time = w.Elapsed }
+        #else
+
+        let handleException (printers: TestPrinters) (name: string) (e:Exception)=
+            match e with
+            | :? AssertException ->
+                let msg =
+                    let firstLine = 
+                        (stackTraceToString e.StackTrace).Split('\n') 
+                        |> Seq.filter (fun q -> q.Contains ",1): ") 
+                        |> Seq.tryHead
+                        |> Option.defaultValue ""
+                    sprintf "\n%s\n%s\n" e.Message firstLine
+                printers.Failed name msg
+                { Name = name
+                  Result = Failed msg}
+            | :? IgnoreException ->
+                printers.Ignored name e.Message
+                { Name = name
+                  Result = Ignored e.Message}
+            | _ ->
+                printers.Exception name e
+                { Name = name
+                  Result = TestResult.Error e }
         #endif
 
         fun (printers: TestPrinters) map ->
@@ -388,9 +413,7 @@ module Impl =
                     { Name = name
                       Result = Passed }
                 with e ->
-                    printers.Exception name e
-                    { Name = name
-                      Result = TestResult.Error e }
+                    handleException printers name e
             #endif
             map execOne
 
@@ -508,12 +531,10 @@ module Tests =
     let inline failtest msg = raise <| AssertException msg
     /// Fail this test
     let inline failtestf fmt = Printf.ksprintf (fun msg -> raise <| AssertException msg) fmt
-    #if !FABLE_COMPILER
     /// Skip this test
     let inline skiptest msg = raise <| IgnoreException msg
     /// Skip this test
     let inline skiptestf fmt = Printf.ksprintf (fun msg -> raise <| IgnoreException msg) fmt
-    #endif
     /// Builds a list/group of tests
     let inline testList name tests = TestLabel(name, TestList tests)
 
