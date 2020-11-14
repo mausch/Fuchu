@@ -298,6 +298,7 @@ module Impl =
         Exception: string -> exn -> unit
         #endif
     } with
+        /// The Default test printers is to not print out anything at all
         static member Default = {
             BeforeRun = ignore
             Ignored = ignore2
@@ -449,6 +450,7 @@ module Impl =
                                      Failed = printFailed
                                      Exception = printException }
 #if !FABLE_COMPILER
+    /// Parallel map of a sequence
     let pmap (f: _ -> _) (s: _ seq) = s.AsParallel().Select(f) :> _ seq
     /// Evaluates tests in parallel
     let evalPar printer =
