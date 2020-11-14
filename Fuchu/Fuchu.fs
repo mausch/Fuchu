@@ -311,7 +311,6 @@ module Impl =
             Exception = ignore2
             #endif
             }
-
     /// Runs a list of tests, with parameterized printers (progress indicators) and traversal.
     /// Returns list of results.
     let evalTestList =
@@ -439,7 +438,16 @@ module Impl =
     #endif
     /// Evaluates tests sequentially
     let evalSeq printer = fun t-> eval printer Seq.map t |> List.ofSeq
-    
+
+    type TestPrinters with
+        static member Failure = { TestPrinters.Default with
+                                   Failed = printFailed
+                                   Exception = printException }
+        static member Diagnostic = { BeforeRun = printBeforeRun
+                                     Passed = printPassed
+                                     Ignored = printIgnored
+                                     Failed = printFailed
+                                     Exception = printException }
 #if !FABLE_COMPILER
     let pmap (f: _ -> _) (s: _ seq) = s.AsParallel().Select(f) :> _ seq
     /// Evaluates tests in parallel
@@ -586,24 +594,38 @@ module Tests =
     [<Obsolete("Use a pair instead")>]
     let inline (==>) name test = name,test
 
+    /// Runs tests with printers
+    [<Extension; CompiledName("RunPrint")>]
+    let runPrint printer tests = runEval (evalSeq printer) tests
     /// Runs tests
     [<Extension; CompiledName("Run")>]
-    let run printer tests = runEval (evalSeq printer) tests
+    let run tests = runEval (evalSeq TestPrinters.Failure) tests
+
     #if !FABLE_COMPILER
 
+    /// Runs tests in parallel with printers
+    [<Extension; CompiledName("RunParallelPrint")>]
+    let runParallelPrint printer tests = runEval (evalPar printer) tests
     /// Runs tests in parallel
     [<Extension; CompiledName("RunParallel")>]
-    let runParallel printer tests = runEval (evalPar printer) tests
+    let runParallel tests = runEval (evalPar TestPrinters.Failure) tests
     #endif
-    type Verbosity = | Failure | Debug
+    /// Verbosity of printing
+    type Verbosity =
+        /// Print failures and exceptions
+        | Failure
+        /// Configure the printers to print out everything
+        | Diagnostic
     // Runner options
     type RunOptions = { Parallel: bool; Verbosity: Verbosity }
 
     /// Parses command-line arguments
     let parseArgs =
         let defaultOptions = { RunOptions.Parallel = false; Verbosity = Failure }
-        let opts = [ "/m", fun o -> { o with RunOptions.Parallel = true }
-                     "/d", fun o -> { o with RunOptions.Verbosity = Debug } ]
+        let withParallel = fun o -> { o with RunOptions.Parallel = true }
+        let withDiagnostic = fun o -> { o with RunOptions.Verbosity = Diagnostic }
+        let opts = [ "/m", withParallel
+                     "/d", withDiagnostic ]
         fun (args: string[]) ->
             (defaultOptions, args) 
             ||> Seq.fold (fun opt arg -> 
@@ -614,23 +636,14 @@ module Tests =
     let defaultMainWithOptions tests (options: RunOptions) =
         let printer = 
             match options.Verbosity with
-            | Failure ->
-                { TestPrinters.Default with 
-                    Failed = printFailed
-                    Exception = printException }
-
-            | Debug ->
-               {   BeforeRun = printBeforeRun
-                   Passed = printPassed
-                   Ignored = printIgnored
-                   Failed = printFailed
-                   Exception = printException }
-        
+            | Failure -> TestPrinters.Failure
+            | Diagnostic -> TestPrinters.Diagnostic
+            | _ -> TestPrinters.Default
         #if !FABLE_COMPILER
-        let run = if options.Parallel then runParallel else run
-        run printer tests
+        let runPrint = if options.Parallel then runParallelPrint else runPrint
+        runPrint printer tests
         #else
-        run printer tests
+        runPrint printer tests
         #endif
         
     
@@ -687,7 +700,7 @@ type TestExtensions =
         let printers = { Impl.TestPrinters.Default with 
                             Failed = Impl.printFailed
                             Exception = Impl.printException }
-        tests |> run printers
+        TestList tests |> runPrint printers
 
     /// Maps all TestCodes in a Test
     [<Extension>]
