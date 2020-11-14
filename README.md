@@ -80,6 +80,8 @@ You can single out tests by filtering them by name. For example:
 
 You can use the F# REPL to run tests this way.
 
+### Using Fuchu with C\# ###
+
 In C#:
 
     static int Main(string[] args) {
@@ -91,6 +93,31 @@ Or scanning for tests marked with the [Tests] attribute:
     static int Main(string[] args) {
         return Tests.DefaultMainThisAssembly(args);
     }
+
+### Using Fuchu with Fable ###
+
+In order to be able to test your code both with .net and Fable you can adjust your main:
+
+    open Fuchu
+    #if FABLE_COMPILER
+    let exitIfNonZero v =
+        if v <> 0 then
+            failwithf "expected a nonzero exitcode, but got %i" v
+        v
+    #endif
+
+    [<EntryPoint>]
+    let main args =
+        defaultMain Tests.tests args
+        #if FABLE_COMPILER
+        |> exitIfNonZero
+        #endif
+
+Note that we don't use assembly scanning with Fable.
+
+In order to run the tests with Fable you then use `dotnet fable` to run your test project:
+
+    dotnet fable YourTestProject --outDir bin --runScript ./bin /d
 
 ## FsCheck integration ##
 
