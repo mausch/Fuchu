@@ -70,7 +70,7 @@ which returns 1 if any tests failed, otherwise 0. Useful for returning to the op
     [<EntryPoint>]
     let main args = defaultMainThisAssembly args
     
-This `defaultMainThisAssembly` function admits a "/m" parameter passed through the command-line to run tests in parallel.
+This `defaultMainThisAssembly` function admits a "/m" parameter passed through the command-line to run tests in parallel. In order to get diagnostic messages you pass in a "/d".
     
 You can single out tests by filtering them by name. For example:
 
