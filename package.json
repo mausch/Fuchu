@@ -1,8 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "pretest": "dotnet fable Fuchu.FableTests --outDir bin",
-    "test": "node --eval \"require('esm')(module)('./bin/Main.js')\" ./bin/Main.js ./bin/Main.js ./bin /d"
+    "test": "dotnet fable Fuchu.FableTests --outDir bin --runScript ./bin /d"
   },
   "dependencies": {
     "esm": "^3.2.25",
