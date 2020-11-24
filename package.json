@@ -1,13 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "test": "dotnet fable Fuchu.FableTests --outDir bin --runScript ./bin /d"
+    "test": "dotnet fable Fuchu.FableTests --outDir bin --runScript /d"
   },
   "dependencies": {
-    "esm": "^3.2.25",
-    "isomorphic-fetch": "^3.0.0",
-    "minimist": "^1.2.5",
-    "mocha": "^7.1.0"
+    "esm": "^3.2.25"
   },
   "name": "tests"
 }

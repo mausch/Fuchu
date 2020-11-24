@@ -115,9 +115,19 @@ In order to be able to test your code both with .net and Fable you can adjust yo
 
 Note that we don't use assembly scanning with Fable.
 
+You will need to have [esm](https://www.npmjs.com/package/esm) installed, leaving you with the following package.json:
+
+    {
+        "private": true,
+        "dependencies": {
+            "esm": "^3.2.25"
+        },
+        "name": "tests"
+    }
+
 In order to run the tests with Fable you then use `dotnet fable` to run your test project:
 
-    dotnet fable YourTestProject --outDir bin --runScript ./bin /d
+    dotnet fable YourTestProject --outDir bin --runScript
 
 ## FsCheck integration ##
 
