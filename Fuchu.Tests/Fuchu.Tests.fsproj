@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Fuchu.Tests</RootNamespace>
     <AssemblyName>Fuchu.Tests</AssemblyName>
-    <TargetFrameworks>net452;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.Tests</Name>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configurations>Debug;Release;Fable</Configurations>
@@ -31,8 +31,9 @@
     <ProjectReference Include="..\Fuchu.TeamCity\Fuchu.TeamCity.fsproj" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+  <!--   <PackageReference Update="FSharp.Core" Version="4.6.2" /> -->
+  <!--   <PackageReference Include="NUnit" Version="3.12.0" /> -->
+  <!-- </ItemGroup> -->
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
