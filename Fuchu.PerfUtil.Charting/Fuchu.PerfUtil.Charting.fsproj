@@ -4,11 +4,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.PerfUtil.Charting</RootNamespace>
     <AssemblyName>Fuchu.PerfUtil.Charting</AssemblyName>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.PerfUtil.Charting</Name>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="Charting.fs" />
   </ItemGroup>
   <ItemGroup>
@@ -27,4 +28,5 @@
   <ItemGroup>
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

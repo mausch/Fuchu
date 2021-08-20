@@ -13,6 +13,7 @@
     <DefineConstants Condition=" '$(Configuration)' == 'Fable'">$(DefineConstants);FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="Prelude.fs" />
     <Compile Include="Tests.fs" />
     <Compile Include="Main.fs" />
@@ -26,5 +27,5 @@
   <!--   <PackageReference Include="Fable.Promise" Version="2.1.0" /> -->
   <!--   <PackageReference Include="Fable.Fetch" Version="2.2.0" /> -->
   <!-- </ItemGroup> -->
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

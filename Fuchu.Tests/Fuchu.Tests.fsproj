@@ -13,6 +13,7 @@
     <DefineConstants Condition=" '$(Configuration)' == 'Fable'">$(DefineConstants);FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="Prelude.fs" />
     <Compile Include="NUnitTestTypes.fs" />
     <Compile Include="NUnitTests.fs" />
@@ -35,5 +36,5 @@
   <!--   <PackageReference Update="FSharp.Core" Version="4.6.2" /> -->
   <!--   <PackageReference Include="NUnit" Version="3.12.0" /> -->
   <!-- </ItemGroup> -->
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

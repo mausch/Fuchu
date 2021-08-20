@@ -15,6 +15,7 @@
 
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="PerfUtil.fs" />
   </ItemGroup>
@@ -25,4 +26,5 @@
     <!-- <PackageReference Update="FSharp.Core" Version="4.6.2" /> -->
     <!-- <PackageReference Include="PerfUtil" Version="0.1.8" /> -->
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

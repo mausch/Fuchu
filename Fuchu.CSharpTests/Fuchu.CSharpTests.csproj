@@ -14,5 +14,5 @@
   <!-- <ItemGroup> -->
   <!--   <PackageReference Include="FSharp.Core" Version="4.6.2" /> -->
   <!-- </ItemGroup> -->
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
