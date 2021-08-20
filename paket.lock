@@ -1,4 +1,7 @@
 STORAGE: NONE
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Gallio_MbUnit (3.4.14)
 
 GROUP Build
 STORAGE: NONE
