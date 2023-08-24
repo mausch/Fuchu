@@ -22,32 +22,38 @@ Add the following line to your paket.dependencies file
 
 Here's the simplest test possible:
 
-    open Fuchu
+```f#
+open Fuchu
 
-    let simpleTest = 
-        testCase "A simple test" <| 
-            fun _ -> Assert.Equal("2+2", 4, 2+2)
+let simpleTest =
+    testCase "A simple test" <| 
+        fun _ -> Assert.Equal("2+2", 4, 2+2)
+```
 
 Tests can be grouped (with arbitrary nesting):
 
-    let tests = 
-        testList "A test group" [
-            testCase "one test" <|
-                fun _ -> Assert.Equal("2+2", 4, 2+2)
-            testCase "another test" <|
-                fun _ -> Assert.Equal("3+3", 3, 3+3)
-        ]
+```f#
+let tests = 
+    testList "A test group" [
+        testCase "one test" <|
+            fun _ -> Assert.Equal("2+2", 4, 2+2)
+        testCase "another test" <|
+            fun _ -> Assert.Equal("3+3", 3, 3+3)
+    ]
+```
 
 In C#:
 
-    static Test ATest {
-        get {
-            return Test.List("A test group", new[] {
-                Test.Case("one test", () => Assert.Equal("2+2", 4, 2+2)),
-                Test.Case("another test", () => Assert.Equal("3+3", 3, 3+3)),
-            });
-        }
+```c#
+static Test ATest {
+    get {
+        return Test.List("A test group", new[] {
+            Test.Case("one test", () => Assert.Equal("2+2", 4, 2+2)),
+            Test.Case("another test", () => Assert.Equal("3+3", 3, 3+3)),
+        });
     }
+}
+```
     
 The first parameter in the assertions describes the assertion. This is usually an optional parameter in most test frameworks; in Fuchu it's required to foster descriptive failures, so you'll get a failure like "3+3 Expected value 3, actual 6" instead of just "Expected value 3, actual 6".
 
@@ -61,57 +67,82 @@ Fuchu is mainly oriented to test organization. Although it does have a few basic
 
 The test runner is the test assembly itself. It's recommended to compile your test assembly as a console application. You can run a test directly like this:
 
-    run simpleTest // or runParallel
-    
+```f#
+run simpleTest // or runParallel
+```
+
 which returns 1 if any tests failed, otherwise 0. Useful for returning to the operating system as error code. Or you can mark the top-level test in each test file with the `[<Tests>]` attribute, then define your main like this:
 
-    open Fuchu
+```f#
+open Fuchu
 
-    [<EntryPoint>]
-    let main args = defaultMainThisAssembly args
+[<EntryPoint>]
+let main args = defaultMainThisAssembly args
+```
     
 This `defaultMainThisAssembly` function admits a "/m" parameter passed through the command-line to run tests in parallel. In order to get diagnostic messages you pass in a "/d".
     
 You can single out tests by filtering them by name. For example:
 
-    tests
-    |> Test.filter (fun s -> s.EndsWith "another test")
-    |> run
+```f#
+tests
+|> Test.filter (fun s -> s.EndsWith "another test")
+|> run
+```
 
 You can use the F# REPL to run tests this way.
+
+### F\# Script ###
+
+In a F# script you can use that F# is able to load NuGet assemblies directly.
+
+```f#
+#r "nuget: Fuchu"
+open Fuchu
+let simpleTest = 
+    testCase "A simple test" <| 
+        fun _ -> Assert.Equal("2+2", 4, 2+2)
+run simpleTest
+```
 
 ### Using Fuchu with C\# ###
 
 In C#:
 
-    static int Main(string[] args) {
-        return ATest.Run(); // or RunParallel()
-    }
+```c#
+static int Main(string[] args) {
+    return ATest.Run(); // or RunParallel()
+}
+```
 
 Or scanning for tests marked with the [Tests] attribute:
 
-    static int Main(string[] args) {
-        return Tests.DefaultMainThisAssembly(args);
-    }
+```c#
+static int Main(string[] args) {
+    return Tests.DefaultMainThisAssembly(args);
+}
+```
 
 ### Using Fuchu with Fable ###
 
 In order to be able to test your code both with .net and Fable you can adjust your main:
 
-    open Fuchu
-    #if FABLE_COMPILER
-    let exitIfNonZero v =
-        if v <> 0 then
-            failwithf "expected a nonzero exitcode, but got %i" v
-        v
-    #endif
+```f#
+open Fuchu
+#if FABLE_COMPILER
+let exitIfNonZero v =
+    if v <> 0 then
+        failwithf "expected a nonzero exitcode, but got %i" v
+    v
+#endif
 
-    [<EntryPoint>]
-    let main args =
-        defaultMain Tests.tests args
-        #if FABLE_COMPILER
-        |> exitIfNonZero
-        #endif
+[<EntryPoint>]
+let main args =
+    defaultMain Tests.tests args
+    #if FABLE_COMPILER
+    |> exitIfNonZero
+    #endif
+```
 
 Note that we don't use assembly scanning with Fable.
 
@@ -133,32 +164,35 @@ In order to run the tests with Fable you then use `dotnet fable` to run your tes
 
 Reference [FsCheck](http://fscheck.codeplex.com/) and Fuchu.FsCheck to test properties:
 
+```f#
+let config = { FsCheck.Config.Default with MaxTest = 10000 }
 
-    let config = { FsCheck.Config.Default with MaxTest = 10000 }
-    
-    let properties = 
-        testList "FsCheck" [
-            testProperty "Addition is commutative" <|
-                fun a b -> 
-                    a + b = b + a
-            
-            // you can also override the FsCheck config
-            testPropertyWithConfig config "Product is distributive over addition" <|
-                fun a b c -> 
-                    a * (b + c) = a * b + a * c
-        ]
+let properties = 
+    testList "FsCheck" [
+        testProperty "Addition is commutative" <|
+            fun a b -> 
+                a + b = b + a
+        
+        // you can also override the FsCheck config
+        testPropertyWithConfig config "Product is distributive over addition" <|
+            fun a b c -> 
+                a * (b + c) = a * b + a * c
+    ]
 
-    run properties
+run properties
+```
     
 In C# (can't override FsCheck config at the moment):
 
-    static Test Properties =
-        Test.List("FsCheck", new[] {
-            FsCheck.Property("Addition is commutative",
-                                (int a, int b) => a + b == b + a),
-            FsCheck.Property("Product is distributive over addition",
-                                (int a, int b, int c) => a * (b + c) == a * b + a * c),
-        });
+```c#
+static Test Properties =
+    Test.List("FsCheck", new[] {
+        FsCheck.Property("Addition is commutative",
+                            (int a, int b) => a + b == b + a),
+        FsCheck.Property("Product is distributive over addition",
+                            (int a, int b, int c) => a * (b + c) == a * b + a * c),
+    });
+```
 
 You can freely mix FsCheck properties with regular test cases and test lists.
 
@@ -166,54 +200,56 @@ You can freely mix FsCheck properties with regular test cases and test lists.
 
 The integration with Eirik's PerfUtil project.
 
-    open global.PerfUtil
+```f#
+open global.PerfUtil
 
-    module Types =
-        type Y = { a : string; b : int }
+module Types =
+    type Y = { a : string; b : int }
 
-    type Serialiser =
-        inherit ITestable
-        abstract member Serialise<'a> : 'a -> unit
+type Serialiser =
+    inherit ITestable
+    abstract member Serialise<'a> : 'a -> unit
 
-    type MySlowSerialiser() =
-        interface ITestable with
-            member x.Name = "Slow Serialiser"
-        interface Serialiser with
-            member x.Serialise _ =
-                System.Threading.Thread.Sleep(30)
+type MySlowSerialiser() =
+    interface ITestable with
+        member x.Name = "Slow Serialiser"
+    interface Serialiser with
+        member x.Serialise _ =
+            System.Threading.Thread.Sleep(30)
 
-    type FastSerialiser() =
-        interface ITestable with
-            member x.Name = "Fast Serialiser"
-        interface Serialiser with
-            member x.Serialise _ =
-                System.Threading.Thread.Sleep(10)
+type FastSerialiser() =
+    interface ITestable with
+        member x.Name = "Fast Serialiser"
+    interface Serialiser with
+        member x.Serialise _ =
+            System.Threading.Thread.Sleep(10)
 
-    type FastSerialiserAlt() =
-        interface ITestable with
-            member x.Name = "Fast Serialiser Alt"
-        interface Serialiser with
-            member x.Serialise _ =
-                System.Threading.Thread.Sleep(20)
+type FastSerialiserAlt() =
+    interface ITestable with
+        member x.Name = "Fast Serialiser Alt"
+    interface Serialiser with
+        member x.Serialise _ =
+            System.Threading.Thread.Sleep(20)
 
-    let alts : Serialiser list = [ FastSerialiser(); FastSerialiserAlt() ]
-    let subj = MySlowSerialiser() :> Serialiser
+let alts : Serialiser list = [ FastSerialiser(); FastSerialiserAlt() ]
+let subj = MySlowSerialiser() :> Serialiser
 
-    open Types
+open Types
 
-    let normal_serlialisation : PerfTest<Serialiser> list = [
-        perfTest "serialising string" <| fun s ->
-            s.Serialise("wowowow")
-        perfTest "serialising record" <| fun s ->
-            s.Serialise { a = "hello world"; b = 42 }
-        ]
+let normal_serlialisation : PerfTest<Serialiser> list = [
+    perfTest "serialising string" <| fun s ->
+        s.Serialise("wowowow")
+    perfTest "serialising record" <| fun s ->
+        s.Serialise { a = "hello world"; b = 42 }
+    ]
 
-    [<Tests>]
-    let tests =
-        testList "performance comparison tests" [
-            testPerfImpls "implementations of Serialiser" subj alts normal_serlialisation
-            testPerfHistory "historical MySlowSerialiser" subj "v1.2.3" normal_serlialisation
-        ]
+[<Tests>]
+let tests =
+    testList "performance comparison tests" [
+        testPerfImpls "implementations of Serialiser" subj alts normal_serlialisation
+        testPerfHistory "historical MySlowSerialiser" subj "v1.2.3" normal_serlialisation
+    ]
+```
 
 This example shows both a comparison performance test between MySlowSerialiser, FastSerialiser and
 FastSerialiserAlt: `testPerfImpls` and a historical comparison of MySlowSerialiser alone
