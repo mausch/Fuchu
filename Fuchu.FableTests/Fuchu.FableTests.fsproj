@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Fuchu.FableTests</RootNamespace>
     <AssemblyName>Fuchu.FableTests</AssemblyName>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.FableTests</Name>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configurations>Debug;Release;Fable</Configurations>
@@ -13,6 +13,7 @@
     <DefineConstants Condition=" '$(Configuration)' == 'Fable'">$(DefineConstants);FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="Prelude.fs" />
     <Compile Include="Tests.fs" />
     <Compile Include="Main.fs" />
@@ -20,10 +21,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
-    <PackageReference Include="Fable.Core" Version="3.1.6" />
-    <PackageReference Include="Fable.Promise" Version="2.1.0" />
-    <PackageReference Include="Fable.Fetch" Version="2.2.0" />
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+  <!--   <PackageReference Update="FSharp.Core" Version="4.6.2" /> -->
+  <!--   <PackageReference Include="Fable.Core" Version="3.1.6" /> -->
+  <!--   <PackageReference Include="Fable.Promise" Version="2.1.0" /> -->
+  <!--   <PackageReference Include="Fable.Fetch" Version="2.2.0" /> -->
+  <!-- </ItemGroup> -->
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

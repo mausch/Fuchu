@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.MbUnit</RootNamespace>
     <AssemblyName>Fuchu.MbUnit</AssemblyName>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.MbUnit</Name>
     <Authors>Mauricio Scheffer</Authors>
     <Description>Converts Fuchu tests to MbUnit tests</Description>
@@ -13,6 +13,7 @@
     <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="FuchuTestToMbUnit.fs" />
   </ItemGroup>
@@ -25,4 +26,5 @@
   <ItemGroup>
     <PackageReference Include="Gallio_MbUnit" Version="3.4.14.0" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

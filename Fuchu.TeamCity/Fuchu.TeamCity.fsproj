@@ -4,10 +4,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.TeamCity</RootNamespace>
     <AssemblyName>Fuchu.TeamCity</AssemblyName>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.TeamCity</Name>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="Runner.fs" />
   </ItemGroup>
   <ItemGroup>
@@ -24,4 +25,5 @@
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.6.2" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

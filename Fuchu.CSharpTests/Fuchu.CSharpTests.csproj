@@ -5,13 +5,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fuchu.CSharpTests</RootNamespace>
     <AssemblyName>Fuchu.CSharpTests</AssemblyName>
-    <TargetFrameworks>net452;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuchu.FsCheck\Fuchu.FsCheck.fsproj" />
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.6.2" />
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+  <!--   <PackageReference Include="FSharp.Core" Version="4.6.2" /> -->
+  <!-- </ItemGroup> -->
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -2,6 +2,7 @@ source https://www.nuget.org/api/v2
 source https://api.nuget.org/v3/index.json
 storage: none
 
+nuget Gallio_MbUnit 3.4.14.0
 // [ FAKE GROUP ]
 group Build
     storage: none

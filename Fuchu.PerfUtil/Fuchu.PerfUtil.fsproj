@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fuchu.PerfUtil</RootNamespace>
     <AssemblyName>Fuchu.PerfUtil</AssemblyName>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Name>Fuchu.PerfUtil</Name>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -15,6 +15,7 @@
 
   </PropertyGroup>
   <ItemGroup>
+    <None Include="paket.references" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="PerfUtil.fs" />
   </ItemGroup>
@@ -22,7 +23,8 @@
     <ProjectReference Include="..\Fuchu\Fuchu.fsproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
-    <PackageReference Include="PerfUtil" Version="0.1.8" />
+    <!-- <PackageReference Update="FSharp.Core" Version="4.6.2" /> -->
+    <!-- <PackageReference Include="PerfUtil" Version="0.1.8" /> -->
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
