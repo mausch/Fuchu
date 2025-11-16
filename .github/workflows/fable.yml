@@ -16,13 +16,11 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.201
+        dotnet-version: 8.x
     - name: Restore tools
       run: dotnet tool restore
     - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '15.x'
+      uses: actions/setup-node@v5
     - name: Install npm dependencies
       run: npm install
     - name: Run Fable tests
